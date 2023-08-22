@@ -10,12 +10,14 @@ import java.time.Duration;
 
 
 public class WaitUtil {
-    private static WebDriverWait wait;
     private static final String WAIT_TIME = ConfigUtil.getConfProperty("explicitWaitTime");
-    private static final int WAIT_ATTRIBUTE_TIME = 50;
+    private static WebDriverWait wait = new WebDriverWait(DriverFactory.getInstance(), Duration.ofSeconds(Long.parseLong(WAIT_TIME)));
 
     public static WebElement setPresenceWait(By locator) {
-        wait = new WebDriverWait(DriverFactory.getInstance(), Duration.ofSeconds(Long.parseLong(WAIT_TIME)));
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
+    public static WebElement setVisibilityWait(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 }

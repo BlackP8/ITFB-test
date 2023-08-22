@@ -12,10 +12,6 @@ public abstract class BasePage {
         this.name = name;
     }
 
-    public By getLocator() {
-        return locator;
-    }
-
     public boolean isPageAppeared() {
         return WaitUtil.setPresenceWait(locator).isDisplayed();
     }
