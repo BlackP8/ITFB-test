@@ -4,17 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b8a6bb1-0b58-4a4e-8dc3-81aa8a80a660" name="Changes" comment="First commit">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="1b8a6bb1-0b58-4a4e-8dc3-81aa8a80a660" name="Changes" comment="Comparison page finished">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/base/BaseElement.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/base/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/base/BasePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/driver/DriverFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/driver/DriverFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/elements/Button.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/base/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/base/BaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/page_objects/CatGoodiesPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/page_objects/CatGoodiesPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/page_objects/CompareListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/page_objects/CompareListPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/page_objects/FilterForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/page_objects/FilterForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/page_objects/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/page_objects/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/page_objects/ProductPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/page_objects/ProductPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/YandexMarketTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/YandexMarketTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/utils/WaitUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utils/WaitUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/resources/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/resources/testdata.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/testdata.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test-output/emailable-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/test-output/emailable-report.html" afterDir="false" />
@@ -63,7 +62,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Learning/ITFB/ITFB-Test",
+    "last_opened_file_path": "D:/Learning/tquality/Lvl2/final/examTask",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -113,7 +112,8 @@
       <option name="presentableId" value="Default" />
       <updated>1692588578942</updated>
       <workItem from="1692588580142" duration="23368000" />
-      <workItem from="1692676596540" duration="30483000" />
+      <workItem from="1692676596540" duration="30651000" />
+      <workItem from="1692762722695" duration="8930000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1692605745901</created>
@@ -129,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692605756169</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Comparison page finished">
+      <created>1692720590233</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1692720590233</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,6 +167,23 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="First commit" />
+    <MESSAGE value="Comparison page finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comparison page finished" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/tests/YandexMarketTest.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/page_objects/FilterForm.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

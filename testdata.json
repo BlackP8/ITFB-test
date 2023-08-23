@@ -4,5 +4,6 @@
   "firstBrandName": "Whiskas",
   "secondBrandName": "Мнямс",
   "firstProductNumber": "0",
-  "secondProductNumber": "1"
+  "secondProductNumber": "1",
+  "expectedPriceSumLimit": "1000"
 }

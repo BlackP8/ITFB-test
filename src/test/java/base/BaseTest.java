@@ -8,12 +8,13 @@ import utils.ConfigUtil;
 
 public abstract class BaseTest {
     private static final String URL_PARAM_NAME = "url";
+    private static final String BROWSER_PARAM_NAME = "browser";
 
-    @Parameters({"browser", "config_path"})
+    @Parameters("config_path")
     @BeforeTest
-    public void setup(String browser, String configPath) {
+    public void setup(String configPath) {
         ConfigUtil.setConfig(configPath);
-        DriverFactory.createInstance(browser);
+        DriverFactory.createInstance(ConfigUtil.getConfProperty(BROWSER_PARAM_NAME));
         DriverFactory.getInstance().manage().window().maximize();
         DriverFactory.getInstance().get(ConfigUtil.getConfProperty(URL_PARAM_NAME));
     }

@@ -4,7 +4,6 @@
 <suite name = "Tests suit" thread-count="1" verbose="1" annotations="JDK" parallel="tests">
     <test name = "Yandex market test">
         <parameter name="test_file" value="src/test/resources/testdata.json"/>
-        <parameter name="browser" value="chrome"/>
         <parameter name="config_path" value="src/test/resources/config.json"/>
         <classes>
             <class name = "tests.YandexMarketTest"/>

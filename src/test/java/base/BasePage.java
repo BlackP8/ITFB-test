@@ -5,11 +5,9 @@ import utils.WaitUtil;
 
 public abstract class BasePage {
     private final By locator;
-    private final String name;
 
-    protected BasePage(By locator, String name) {
+    protected BasePage(By locator) {
         this.locator = locator;
-        this.name = name;
     }
 
     public boolean isPageAppeared() {

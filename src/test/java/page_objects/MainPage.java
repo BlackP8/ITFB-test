@@ -3,9 +3,7 @@ package page_objects;
 import base.BasePage;
 import driver.DriverFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
-import utils.ScrollUtil;
 import utils.WaitUtil;
 
 
@@ -16,24 +14,18 @@ public class MainPage extends BasePage {
     private static final Actions actions = new Actions(DriverFactory.getInstance());
 
     public MainPage() {
-        super(By.xpath("//*[@data-zone-name='index-page']"), "mainPageIdentifier");
+        super(By.xpath("//*[@data-zone-name='index-page']"));
     }
 
     public void openCatalogue() {
-//        JavascriptExecutor executor = (JavascriptExecutor) DriverFactory.getInstance();
-//        executor.executeScript("arguments[0].click();", WaitUtil.setPresenceWait(catalogueButton));
         WaitUtil.setPresenceWait(catalogueButton).click();
     }
 
     public void chooseAnimalGoods() {
-//        ScrollUtil.scrollToElement(WaitUtil.setPresenceWait(petSuppliesCategory));
         actions.moveToElement(WaitUtil.setPresenceWait(petSuppliesCategory)).build().perform();
     }
 
     public void chooseCatGoodies() {
-//        ScrollUtil.scrollToElement(WaitUtil.setPresenceWait(catGoodiesButton));
-//        JavascriptExecutor executor = (JavascriptExecutor) DriverFactory.getInstance();
-//        executor.executeScript("arguments[0].click();", WaitUtil.setPresenceWait(catGoodiesButton));
         actions.moveToElement(WaitUtil.setPresenceWait(catGoodiesButton)).build().perform();
         WaitUtil.setPresenceWait(catGoodiesButton).click();
     }

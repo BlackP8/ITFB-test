@@ -5,18 +5,23 @@ import org.openqa.selenium.By;
 import utils.WaitUtil;
 
 public class ProductPage extends BasePage {
-    private final By compareButton = By.cssSelector("div[data-auto='compare-button']");
-    private final By productDescription = By.cssSelector("h1[data-additional-zone='title']");
+    private final By compareButton = By.cssSelector("*[data-auto='compare-button']");
+    private final By productName = By.cssSelector("*[data-additional-zone='title']");
+    private final By compareListButton = By.cssSelector("*[href='/my/compare-lists']");
 
     public ProductPage() {
-        super(By.cssSelector("div[data-apiary-widget-name='@MarketNode/ProductSummary']"), "productPageIdentifier");
+        super(By.cssSelector("div[data-apiary-widget-name='@MarketNode/ProductSummary']"));
     }
 
-    public String getProductDescription() {
-        return WaitUtil.setPresenceWait(productDescription).getText();
+    public String getProductName() {
+        return WaitUtil.setPresenceWait(productName).getText();
     }
 
     public void clickCompareButton() {
         WaitUtil.setPresenceWait(compareButton).click();
+    }
+
+    public void clickCompareListButton() {
+        WaitUtil.setPresenceWait(compareListButton).click();
     }
 }
