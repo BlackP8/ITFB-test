@@ -12,7 +12,7 @@ public class FilterForm extends BasePage {
     private final By minPriceField = By.xpath("//*[contains(@id, 'price') and contains(@id, 'min')]");
     private final By maxPriceField = By.xpath("//*[contains(@id, 'price') and contains(@id, 'max')]");
     private final By courierRadioButton = By.cssSelector("*[data-filter-value-id='offer-shipping_delivery']>label");
-    private final By expandBrandsButton = By.xpath("//*[contains(text(), 'Показать всё')]");
+    private final By expandBrandsButton = By.xpath("//*[contains(text(), 'Показать всё')]//ancestor::button");
     private final By brandFilterSearchTextBox = By.cssSelector("*[data-zone-name='filterSearchValueField'] input");
     private final String brandButton = "//span[text()='%s']";
 
@@ -33,7 +33,7 @@ public class FilterForm extends BasePage {
     }
 
     public void expandBrands() {
-        ScrollUtil.scrollToElement(WaitUtil.setVisibilityWait(expandBrandsButton));
+        ScrollUtil.scrollToElement(DriverFactory.getInstance().findElement(expandBrandsButton));
         actions.moveToElement(DriverFactory.getInstance().findElement(expandBrandsButton)).click().build().perform();
 //        DriverFactory.getInstance().findElement(expandBrandsButton).click();
         WaitUtil.setPresenceWait(brandFilterSearchTextBox);

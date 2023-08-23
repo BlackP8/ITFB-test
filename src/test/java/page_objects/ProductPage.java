@@ -21,7 +21,7 @@ public class ProductPage extends BasePage {
         WaitUtil.setPresenceWait(compareButton).click();
     }
 
-    public void clickCompareListButton() {
+    public void clickShowCompareListButton() {
         WaitUtil.setPresenceWait(compareListButton).click();
     }
 }
