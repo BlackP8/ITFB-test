@@ -4,8 +4,6 @@ import io.qameta.allure.Step;
 import org.testng.Assert;
 import page_objects.*;
 
-import java.util.concurrent.TimeoutException;
-
 /**
  * @author - Pavel Romanov
  */
@@ -81,11 +79,6 @@ public class Steps {
         catGoodiesPage.chooseProduct(productIndex);
     }
 
-    @Step("Получение имени товара со страницы товара.")
-    public static String getNameOfProduct() {
-        return productPage.getProductName();
-    }
-
     @Step("Добавление товара в список сравнения.")
     public static void addProductToComparisonList() {
         productPage.clickCompareButton();
@@ -107,8 +100,8 @@ public class Steps {
     }
 
     @Step("Проверка наличия имени товара {productName} в списке сравнения.")
-    public static void checkProductNameExistInComparisonList(boolean expectedResult, String productName) {
-        Assert.assertEquals(compareListPage.doesProductNameExist(productName), expectedResult,
+    public static void checkProductNameExistInComparisonList(boolean expectedResult, String brandName) {
+        Assert.assertEquals(compareListPage.doesProductNameExist(brandName), expectedResult,
                 "Имя товара не соотвутствует добавленному в список сравнения.");
     }
 

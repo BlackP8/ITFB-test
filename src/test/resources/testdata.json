@@ -1,8 +1,8 @@
 {
   "minPrice": "650",
   "maxPrice": "1500",
-  "firstBrandName": "Whiskas",
-  "secondBrandName": "Titbit",
+  "firstBrandName": "dreamies",
+  "secondBrandName": "titbit",
   "firstProductNumber": "0",
   "secondProductNumber": "1",
   "expectedPriceSumLimit": "2000"

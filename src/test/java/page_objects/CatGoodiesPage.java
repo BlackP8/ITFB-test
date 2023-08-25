@@ -5,7 +5,6 @@ import library.driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import library.utils.WaitUtil;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -16,6 +15,7 @@ import java.util.ArrayList;
 
 public class CatGoodiesPage extends BasePage {
     private static final Actions actions = new Actions(DriverFactory.getInstance());
+    private static final int PAUSE_BEFORE_ACTION = 3;
     private final By productPath = By.cssSelector("*[data-autotest-id='product-snippet']");
 
     public CatGoodiesPage() {
@@ -23,8 +23,7 @@ public class CatGoodiesPage extends BasePage {
     }
 
     public void chooseProduct(String productNumber) {
-        WaitUtil.setVisibilityWait(productPath);
         ArrayList<WebElement> products = (ArrayList<WebElement>) DriverFactory.getInstance().findElements(productPath);
-        actions.pause(Duration.ofSeconds(3)).click(products.get(Integer.parseInt(productNumber))).perform();
+        actions.pause(Duration.ofSeconds(PAUSE_BEFORE_ACTION)).click(products.get(Integer.parseInt(productNumber))).perform();
     }
 }
