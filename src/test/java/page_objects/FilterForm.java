@@ -29,13 +29,13 @@ public class FilterForm extends BasePage {
     }
 
     public void setMinPrice(String minPrice) {
-        WaitUtil.setClickableWait(minPriceField);
+        WaitUtil.setPresenceWait(minPriceField);
         actions.sendKeys(DriverFactory.getInstance().findElement(minPriceField), minPrice)
                 .pause(Duration.ofSeconds(PAUSE_BEFORE_ACTION)).perform();
     }
 
     public void setMaxPrice(String maxPrice) {
-        WaitUtil.setClickableWait(maxPriceField);
+        WaitUtil.setPresenceWait(maxPriceField);
         actions.sendKeys(DriverFactory.getInstance().findElement(maxPriceField), maxPrice)
                 .pause(Duration.ofSeconds(PAUSE_BEFORE_ACTION)).perform();
     }
@@ -53,7 +53,8 @@ public class FilterForm extends BasePage {
 
     public void checkBrandCheckBox(String brandName) {
         WaitUtil.setPresenceWait(brandFilterSearchTextBox);
-        WaitUtil.setClickableWait(By.xpath(String.format(brandButton, brandName))).click();
+        String newBrand = brandName.substring(0, 1).toUpperCase() + brandName.substring(1);
+        WaitUtil.setClickableWait(By.xpath(String.format(brandButton, newBrand))).click();
     }
 
     public void clickToolTip() {

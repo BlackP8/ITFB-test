@@ -15,7 +15,7 @@ import java.time.Duration;
 
 public class MainPage extends BasePage {
     private static final int PAUSE_BEFORE_ACTION = 3;
-    private static final int OFFSET_X_RANGE = 300;
+    private static final int OFFSET_X_RANGE = 500;
     private static final int OFFSET_Y_RANGE = 0;
     private final By catalogueButton = By.xpath("//*[@id='hamburger']//parent::button");
     private final By petSuppliesCategory = By.xpath("//li//following::span[contains(text(), 'Зоотовары')]");
@@ -35,7 +35,7 @@ public class MainPage extends BasePage {
         ScrollUtil.scrollToElement(DriverFactory.getInstance().findElement(petSuppliesCategory));
         actions.pause(Duration.ofSeconds(PAUSE_BEFORE_ACTION))
                 .moveToElement(WaitUtil.setPresenceWait(petSuppliesCategory))
-                .moveByOffset(OFFSET_X_RANGE, OFFSET_Y_RANGE).perform();
+                .moveByOffset(OFFSET_X_RANGE, OFFSET_Y_RANGE).pause(Duration.ofSeconds(PAUSE_BEFORE_ACTION)).perform();
     }
 
     public void chooseCatGoodies() {

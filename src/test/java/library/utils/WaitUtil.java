@@ -27,4 +27,8 @@ public class WaitUtil {
     public static WebElement setClickableWait(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+
+    public static void setInvisibilityWait(By locator) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
 }

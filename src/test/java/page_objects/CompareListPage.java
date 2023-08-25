@@ -6,8 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import library.utils.WaitUtil;
-import org.testng.Assert;
-
 import java.util.List;
 
 /**
@@ -18,7 +16,7 @@ public class CompareListPage extends BasePage {
     private static final Actions actions = new Actions(DriverFactory.getInstance());
     private final String PRICE_VALUE_ATTRIBUTE = "data-autotest-value";
     private final By priceText = By.cssSelector("*[data-auto='mainPrice']");
-    private final String productTitle = "//*[contains(text(), '%s')]";
+    private final By product = By.xpath("//*[@data-auto='cell']//child::a");
     private final By deleteListButton = By.xpath("//*[text()='Удалить список']");
     private final By emptyState = By.cssSelector("*[data-apiary-widget-id='/content/emptyState']");
     private final String deleteProductButton = "//*[contains(text(), '%s')]//following::*[@aria-label='Удалить']";
@@ -41,16 +39,28 @@ public class CompareListPage extends BasePage {
     }
 
     public boolean isComparisonListEmpty() {
-        return WaitUtil.setPresenceWait(emptyState).isDisplayed();
+        WebElement element = WaitUtil.setPresenceWait(emptyState);
+        return element.isDisplayed();
     }
 
-    public boolean doesProductNameExist(String productName) {
-        return DriverFactory.getInstance().findElement(By.xpath(String.format(productTitle, productName))).isDisplayed();
+    public boolean doesProductNameExist(String brandName) {
+        List<WebElement> productsToCompare = DriverFactory.getInstance().findElements(product);
+        int counter = 0;
+
+        for (WebElement product: productsToCompare) {
+            if (product.getText().toLowerCase().contains(brandName)) {
+                counter++;
+            }
+        }
+        return counter == 0;
     }
 
-    public void deleteProduct(String productName) {
-        WaitUtil.setPresenceWait(By.xpath(String.format(deleteProductButton, productName)));
-        actions.moveToElement(DriverFactory.getInstance().findElement(By.xpath(String.format(deleteProductButton, productName))))
-                .click().perform();
+    public void deleteProduct(String brandName) {
+        String newBrand = brandName.substring(0, 1).toUpperCase() + brandName.substring(1);
+        By deletableProduct = By.xpath(String.format(deleteProductButton, newBrand));
+        WaitUtil.setPresenceWait(deletableProduct);
+        actions.moveToElement(DriverFactory.getInstance().findElement(deletableProduct))
+                .doubleClick().perform();
+        WaitUtil.setInvisibilityWait(deletableProduct);
     }
 }

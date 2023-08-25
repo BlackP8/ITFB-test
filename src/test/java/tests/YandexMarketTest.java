@@ -34,7 +34,6 @@ public class YandexMarketTest extends BaseTest {
         Steps.useToolTip();
         Steps.chooseProductOnPageByIndex(firstProductNumber);
         TabUtil.changeTab();
-        String firstProductName = Steps.getNameOfProduct();
         Steps.addProductToComparisonList();
         TabUtil.closeTab();
         TabUtil.switchToPreviousTab();
@@ -45,16 +44,15 @@ public class YandexMarketTest extends BaseTest {
         Steps.useToolTip();
         Steps.chooseProductOnPageByIndex(secondProductNumber);
         TabUtil.changeTab();
-        String secondProductName = Steps.getNameOfProduct();
         Steps.addProductToComparisonList();
         Steps.openComparisonList();
         Steps.checkCompareListPage();
-        Steps.checkProductNameExistInComparisonList(EXPECTED_POSITIVE_RESULT, firstProductName);
-        Steps.checkProductNameExistInComparisonList(EXPECTED_POSITIVE_RESULT, secondProductName);
+        Steps.checkProductNameExistInComparisonList(EXPECTED_NEGATIVE_RESULT, firstBrandName);
+        Steps.checkProductNameExistInComparisonList(EXPECTED_NEGATIVE_RESULT, secondBrandName);
         int priceSum = Steps.getPriceSumFromComparisonList();
         Steps.checkPriceSumLimit(priceSum, Integer.parseInt(expectedPriceSumLimit));
-        Steps.deleteProductFromComparisonList(firstProductName);
-        Steps.checkProductNameExistInComparisonList(EXPECTED_NEGATIVE_RESULT, firstProductName);
+        Steps.deleteProductFromComparisonList(firstBrandName);
+        Steps.checkProductNameExistInComparisonList(EXPECTED_POSITIVE_RESULT, firstBrandName);
         Steps.eraseComparisonList();
         Steps.checkComparisonListEmpty();
     }
