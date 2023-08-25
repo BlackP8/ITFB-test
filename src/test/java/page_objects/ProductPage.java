@@ -1,12 +1,20 @@
 package page_objects;
 
-import base.BasePage;
+import library.base.BasePage;
+import library.driver.DriverFactory;
 import org.openqa.selenium.By;
-import utils.WaitUtil;
+import org.openqa.selenium.interactions.Actions;
+import library.utils.WaitUtil;
+import java.time.Duration;
+
+/**
+ * @author - Pavel Romanov
+ */
 
 public class ProductPage extends BasePage {
+    private static final Actions actions = new Actions(DriverFactory.getInstance());
     private final By compareButton = By.cssSelector("*[data-auto='compare-button']");
-    private final By productName = By.cssSelector("*[data-additional-zone='title']");
+    private final By productName = By.cssSelector("h1[data-baobab-name='title']");
     private final By compareListButton = By.cssSelector("*[href='/my/compare-lists']");
 
     public ProductPage() {
@@ -18,10 +26,10 @@ public class ProductPage extends BasePage {
     }
 
     public void clickCompareButton() {
-        WaitUtil.setPresenceWait(compareButton).click();
+        actions.click(WaitUtil.setClickableWait(compareButton)).pause(Duration.ofSeconds(3)).perform();
     }
 
     public void clickShowCompareListButton() {
-        WaitUtil.setPresenceWait(compareListButton).click();
+        WaitUtil.setClickableWait(compareListButton).click();
     }
 }

@@ -1,31 +1,33 @@
-package driver;
+package library.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.devtools.v113.emulation.Emulation;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static javax.swing.UIManager.put;
+/**
+ * @author - Pavel Romanov
+ */
 
 public abstract class DriverFactory {
     private static WebDriver webDriver = null;
 
+    /**
+     * Метод для создания объекта драйвера для разных браузеров в зависимости от значения в конфиге
+     * @param browserName
+     */
     public static void createInstance(String browserName) {
         if (webDriver == null) {
             Browsers browser = Browsers.valueOf(browserName.toUpperCase());
             switch (browser) {
                 case CHROME:
                     WebDriverManager.chromedriver().setup();
-                    webDriver = new ChromeDriver();
+                    webDriver = new EventFiringWebDriver(new ChromeDriver());
                     break;
                 case FIREFOX:
                     WebDriverManager.firefoxdriver().setup();
-                    webDriver = new FirefoxDriver();
+                    webDriver = new EventFiringWebDriver(new FirefoxDriver());
                     break;
             }
         }

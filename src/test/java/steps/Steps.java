@@ -4,6 +4,12 @@ import io.qameta.allure.Step;
 import org.testng.Assert;
 import page_objects.*;
 
+import java.util.concurrent.TimeoutException;
+
+/**
+ * @author - Pavel Romanov
+ */
+
 public class Steps {
     private static MainPage mainPage = new MainPage();
     private static CatGoodiesPage catGoodiesPage = new CatGoodiesPage();
@@ -101,14 +107,19 @@ public class Steps {
     }
 
     @Step("Проверка наличия имени товара {productName} в списке сравнения.")
-    public static void checkProductNameExistInComparisonList(String productName) {
-        Assert.assertTrue(compareListPage.doesProductNameExist(productName),
+    public static void checkProductNameExistInComparisonList(boolean expectedResult, String productName) {
+        Assert.assertEquals(compareListPage.doesProductNameExist(productName), expectedResult,
                 "Имя товара не соотвутствует добавленному в список сравнения.");
     }
 
+    @Step("Получение суммы стоимостей товаров из списка сравнения.")
+    public static int getPriceSumFromComparisonList() {
+        return compareListPage.getPriceSum();
+    }
+
     @Step("Проверка соответствия суммы стоимости товаров ожидаемому лимиту {expectedPriceSumLimit}.")
-    public static void checkPriceSumLimit(String expectedPriceSumLimit) {
-        Assert.assertTrue(compareListPage.getPriceSum() < Integer.parseInt(expectedPriceSumLimit),
+    public static void checkPriceSumLimit(int actualPriceSum, int expectedPriceSumLimit) {
+        Assert.assertTrue(actualPriceSum < expectedPriceSumLimit,
                 "Сумма стоимостей товаров превышает ожидаемую.");
     }
 
@@ -125,5 +136,10 @@ public class Steps {
     @Step("Проверка, что список сравнения пуст.")
     public static void checkComparisonListEmpty() {
         Assert.assertTrue(compareListPage.isComparisonListEmpty(), "Товары не удалены.");
+    }
+
+    @Step("Нажатие на выпадающее меню количества результатов поиска.")
+    public static void useToolTip() {
+        filter.clickToolTip();
     }
 }

@@ -1,6 +1,10 @@
-package utils;
+package library.utils;
 
-import driver.DriverFactory;
+import library.driver.DriverFactory;
+
+/**
+ * @author - Pavel Romanov
+ */
 
 public class TabUtil {
     private static String originalWindow = DriverFactory.getInstance().getWindowHandle();
@@ -12,10 +16,6 @@ public class TabUtil {
                 break;
             }
         }
-    }
-
-    public static String getTabURL() {
-        return DriverFactory.getInstance().getCurrentUrl();
     }
 
     public static void closeTab() {

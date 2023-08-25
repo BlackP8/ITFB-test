@@ -1,15 +1,24 @@
 package tests;
 
-import base.BaseTest;
+import library.base.BaseTest;
+import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import steps.Steps;
-import utils.DataProviderUtil;
-import utils.TabUtil;
+import library.utils.DataProviderUtil;
+import library.utils.TabUtil;
+
+/**
+ * @author - Pavel Romanov
+ */
 
 public class YandexMarketTest extends BaseTest {
+    private static final boolean EXPECTED_POSITIVE_RESULT = true;
+    private static final boolean EXPECTED_NEGATIVE_RESULT = false;
+
     @Test(dataProviderClass = DataProviderUtil.class, dataProvider = "testData")
-    public void testCatalogue(String secondProductNumber, String secondBrandName, String minPrice, String maxPrice,
-                              String expectedPriceSumLimit, String firstProductNumber, String firstBrandName) {
+    @Description(value = "Тест поиска и сравнения товаров в Яндекс Маркете.")
+    public void testCatalogue(String secondProductNumber, String secondBrandName, String minPrice, String expectedPriceSumLimit,
+                              String maxPrice, String firstProductNumber, String firstBrandName) {
         Steps.checkMainPage();
         Steps.openProductCategories();
         Steps.сhooseProductsForAnimals();
@@ -22,68 +31,31 @@ public class YandexMarketTest extends BaseTest {
         Steps.showAllBrands();
         Steps.enterBrandName(firstBrandName);
         Steps.chooseBrand(firstBrandName);
+        Steps.useToolTip();
         Steps.chooseProductOnPageByIndex(firstProductNumber);
-//        MainPage mainPage = new MainPage();
-//        Assert.assertTrue(mainPage.isPageAppeared(), "Главная страница не открылась.");
-//        mainPage.openCatalogue();
-//        mainPage.chooseAnimalGoods();
-//        mainPage.chooseCatGoodies();
-//
-//        CatGoodiesPage catGoodiesPage = new CatGoodiesPage();
-//        Assert.assertTrue(catGoodiesPage.isPageAppeared(), "Страница с лакомствами для кошек не открылась.");
-//        FilterForm filter = new FilterForm();
-//        Assert.assertTrue(filter.isPageAppeared(), "Фильтра нет");
-//        filter.setMinPrice(minPrice);
-//        filter.setMaxPrice(maxPrice);
-//        filter.setCourierDeliveryOption();
-//        filter.expandBrands();
-//        filter.enterBrandNameInFilter(firstBrandName);
-//        filter.checkBrandCheckBox(firstBrandName);
-//        catGoodiesPage.chooseProduct(firstProductNumber);
-
         TabUtil.changeTab();
         String firstProductName = Steps.getNameOfProduct();
         Steps.addProductToComparisonList();
-//        ProductPage productPage = new ProductPage();
-//        String firstProductName = productPage.getProductName();
-//        productPage.clickCompareButton();
         TabUtil.closeTab();
         TabUtil.switchToPreviousTab();
         Steps.chooseBrand(firstBrandName);
         Steps.clearFindBrandTextBox();
         Steps.enterBrandName(secondBrandName);
         Steps.chooseBrand(secondBrandName);
+        Steps.useToolTip();
         Steps.chooseProductOnPageByIndex(secondProductNumber);
-//
-//        filter.checkBrandCheckBox(firstBrandName);
-//        filter.clearBrandSearchFilterTextBox();
-//        filter.enterBrandNameInFilter(secondBrandName);
-//        filter.checkBrandCheckBox(secondBrandName);
-//        catGoodiesPage.chooseProduct(secondProductNumber);
         TabUtil.changeTab();
         String secondProductName = Steps.getNameOfProduct();
         Steps.addProductToComparisonList();
         Steps.openComparisonList();
-//        String secondProductName = productPage.getProductName();
-//        productPage.clickCompareButton();
-//        productPage.clickShowCompareListButton();
         Steps.checkCompareListPage();
-        Steps.checkProductNameExistInComparisonList(firstProductName);
-        Steps.checkProductNameExistInComparisonList(secondProductName);
-        Steps.checkPriceSumLimit(expectedPriceSumLimit);
+        Steps.checkProductNameExistInComparisonList(EXPECTED_POSITIVE_RESULT, firstProductName);
+        Steps.checkProductNameExistInComparisonList(EXPECTED_POSITIVE_RESULT, secondProductName);
+        int priceSum = Steps.getPriceSumFromComparisonList();
+        Steps.checkPriceSumLimit(priceSum, Integer.parseInt(expectedPriceSumLimit));
         Steps.deleteProductFromComparisonList(firstProductName);
-        Steps.checkProductNameExistInComparisonList(firstProductName);
+        Steps.checkProductNameExistInComparisonList(EXPECTED_NEGATIVE_RESULT, firstProductName);
         Steps.eraseComparisonList();
         Steps.checkComparisonListEmpty();
-//        CompareListPage compareListPage = new CompareListPage();
-//        Assert.assertTrue(compareListPage.isPageAppeared(), "Страница сравнения не открылась.");
-//        Assert.assertTrue(compareListPage.doesProductNameExist(firstProductName), "Имя товара соотвутствует первому товару.");
-//        Assert.assertTrue(compareListPage.doesProductNameExist(secondProductName), "Имя товара соотвутствует второму товару.");
-//        Assert.assertTrue(compareListPage.getPriceSum() < Integer.parseInt(expectedPriceSumLimit),
-//                "Сумма стоимостей товаров превышает ожидаемую.");
-//        compareListPage.deleteProduct(firstProductName);
-//        Assert.assertFalse(compareListPage.doesProductNameExist(firstProductName), "Товар производителя Whiskas не удален.");
-//        compareListPage.clearComparisonList();
-//        Assert.assertTrue(compareListPage.isComparisonListEmpty(), "Товары не удалены.");
     }
 }

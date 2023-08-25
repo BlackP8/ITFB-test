@@ -1,6 +1,10 @@
-package driver;
+package library.driver;
 
-import utils.ConfigUtil;
+import library.utils.ConfigUtil;
+
+/**
+ * @author - Pavel Romanov
+ */
 
 public enum Browsers {
     FIREFOX(ConfigUtil.getConfProperty("firefoxBrowser")),

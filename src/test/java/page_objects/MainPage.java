@@ -1,13 +1,22 @@
 package page_objects;
 
-import base.BasePage;
-import driver.DriverFactory;
+import library.base.BasePage;
+import library.driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
-import utils.WaitUtil;
+import library.utils.ScrollUtil;
+import library.utils.WaitUtil;
 
+import java.time.Duration;
+
+/**
+ * @author - Pavel Romanov
+ */
 
 public class MainPage extends BasePage {
+    private static final int PAUSE_BEFORE_ACTION = 3;
+    private static final int OFFSET_X_RANGE = 300;
+    private static final int OFFSET_Y_RANGE = 0;
     private final By catalogueButton = By.xpath("//*[@id='hamburger']//parent::button");
     private final By petSuppliesCategory = By.xpath("//li//following::span[contains(text(), 'Зоотовары')]");
     private final By catGoodiesButton = By.xpath("//*[contains(@href, 'lakomstva-dlia-koshek')]");
@@ -22,11 +31,15 @@ public class MainPage extends BasePage {
     }
 
     public void chooseAnimalGoods() {
-        actions.moveToElement(WaitUtil.setPresenceWait(petSuppliesCategory)).build().perform();
+        WaitUtil.setPresenceWait(petSuppliesCategory);
+        ScrollUtil.scrollToElement(DriverFactory.getInstance().findElement(petSuppliesCategory));
+        actions.pause(Duration.ofSeconds(PAUSE_BEFORE_ACTION))
+                .moveToElement(WaitUtil.setPresenceWait(petSuppliesCategory))
+                .moveByOffset(OFFSET_X_RANGE, OFFSET_Y_RANGE).perform();
     }
 
     public void chooseCatGoodies() {
-        actions.moveToElement(WaitUtil.setPresenceWait(catGoodiesButton)).build().perform();
-        WaitUtil.setPresenceWait(catGoodiesButton).click();
+        ScrollUtil.scrollToElement(WaitUtil.setPresenceWait(catGoodiesButton));
+        WaitUtil.setClickableWait(catGoodiesButton).click();
     }
 }

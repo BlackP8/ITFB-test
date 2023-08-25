@@ -1,19 +1,27 @@
 package page_objects;
 
-import base.BasePage;
-import driver.DriverFactory;
+import library.base.BasePage;
+import library.driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
-import utils.ScrollUtil;
-import utils.WaitUtil;
+import library.utils.ScrollUtil;
+import library.utils.WaitUtil;
+
+import java.time.Duration;
+
+/**
+ * @author - Pavel Romanov
+ */
 
 public class FilterForm extends BasePage {
     private static final Actions actions = new Actions(DriverFactory.getInstance());
+    private static final int PAUSE_BEFORE_ACTION = 3;
     private final By minPriceField = By.xpath("//*[contains(@id, 'price') and contains(@id, 'min')]");
     private final By maxPriceField = By.xpath("//*[contains(@id, 'price') and contains(@id, 'max')]");
     private final By courierRadioButton = By.cssSelector("*[data-filter-value-id='offer-shipping_delivery']>label");
     private final By expandBrandsButton = By.xpath("//*[contains(text(), 'Показать всё')]//ancestor::button");
     private final By brandFilterSearchTextBox = By.cssSelector("*[data-zone-name='filterSearchValueField'] input");
+    private final By toolTip = By.cssSelector("*[data-auto='filter-found-visible-tooltip']");
     private final String brandButton = "//span[text()='%s']";
 
     public FilterForm() {
@@ -21,34 +29,42 @@ public class FilterForm extends BasePage {
     }
 
     public void setMinPrice(String minPrice) {
-        WaitUtil.setPresenceWait(minPriceField).sendKeys(minPrice);
+        WaitUtil.setClickableWait(minPriceField);
+        actions.sendKeys(DriverFactory.getInstance().findElement(minPriceField), minPrice)
+                .pause(Duration.ofSeconds(PAUSE_BEFORE_ACTION)).perform();
     }
 
     public void setMaxPrice(String maxPrice) {
-        WaitUtil.setPresenceWait(maxPriceField).sendKeys(maxPrice);
+        WaitUtil.setClickableWait(maxPriceField);
+        actions.sendKeys(DriverFactory.getInstance().findElement(maxPriceField), maxPrice)
+                .pause(Duration.ofSeconds(PAUSE_BEFORE_ACTION)).perform();
     }
 
     public void setCourierDeliveryOption() {
-        DriverFactory.getInstance().findElement(courierRadioButton).click();
+        ScrollUtil.scrollToElement(WaitUtil.setPresenceWait(courierRadioButton));
+        actions.pause(Duration.ofSeconds(PAUSE_BEFORE_ACTION)).click(WaitUtil.setClickableWait(courierRadioButton)).perform();
     }
 
     public void expandBrands() {
-        ScrollUtil.scrollToElement(DriverFactory.getInstance().findElement(expandBrandsButton));
-        actions.moveToElement(DriverFactory.getInstance().findElement(expandBrandsButton)).click().build().perform();
-//        DriverFactory.getInstance().findElement(expandBrandsButton).click();
+        ScrollUtil.scrollToElement(WaitUtil.setPresenceWait(expandBrandsButton));
+        actions.pause(Duration.ofSeconds(PAUSE_BEFORE_ACTION)).click(WaitUtil.setClickableWait(expandBrandsButton)).perform();
         WaitUtil.setPresenceWait(brandFilterSearchTextBox);
     }
 
     public void checkBrandCheckBox(String brandName) {
-//        DriverFactory.getInstance().findElement(By.xpath(String.format(brandButton, brandName))).click();
-        WaitUtil.setPresenceWait(By.xpath(String.format(brandButton, brandName))).click();
+        WaitUtil.setPresenceWait(brandFilterSearchTextBox);
+        WaitUtil.setClickableWait(By.xpath(String.format(brandButton, brandName))).click();
+    }
+
+    public void clickToolTip() {
+        WaitUtil.setVisibilityWait(toolTip).click();
     }
 
     public void enterBrandNameInFilter(String brandName) {
-        DriverFactory.getInstance().findElement(brandFilterSearchTextBox).sendKeys(brandName);
+        WaitUtil.setPresenceWait(brandFilterSearchTextBox).sendKeys(brandName);
     }
 
     public void clearBrandSearchFilterTextBox() {
-        DriverFactory.getInstance().findElement(brandFilterSearchTextBox).clear();
+        WaitUtil.setPresenceWait(brandFilterSearchTextBox).clear();
     }
 }

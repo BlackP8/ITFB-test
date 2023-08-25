@@ -1,10 +1,14 @@
-package base;
+package library.base;
 
-import driver.DriverFactory;
+import library.driver.DriverFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
-import utils.ConfigUtil;
+import library.utils.ConfigUtil;
+
+/**
+ * @author - Pavel Romanov
+ */
 
 public abstract class BaseTest {
     private static final String URL_PARAM_NAME = "url";

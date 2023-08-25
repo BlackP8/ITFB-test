@@ -1,13 +1,18 @@
 package page_objects;
 
-import base.BasePage;
-import driver.DriverFactory;
+import library.base.BasePage;
+import library.driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import utils.WaitUtil;
+import library.utils.WaitUtil;
+import org.testng.Assert;
 
 import java.util.List;
+
+/**
+ * @author - Pavel Romanov
+ */
 
 public class CompareListPage extends BasePage {
     private static final Actions actions = new Actions(DriverFactory.getInstance());
@@ -16,7 +21,7 @@ public class CompareListPage extends BasePage {
     private final String productTitle = "//*[contains(text(), '%s')]";
     private final By deleteListButton = By.xpath("//*[text()='Удалить список']");
     private final By emptyState = By.cssSelector("*[data-apiary-widget-id='/content/emptyState']");
-    private final String deleteProductButton = "/*[contains(text(), '%s')]//following::*[@aria-label='Удалить']";
+    private final String deleteProductButton = "//*[contains(text(), '%s')]//following::*[@aria-label='Удалить']";
 
     public CompareListPage() {
         super(By.cssSelector("*[data-apiary-widget-id='/content/compareContent']"));
@@ -44,7 +49,8 @@ public class CompareListPage extends BasePage {
     }
 
     public void deleteProduct(String productName) {
+        WaitUtil.setPresenceWait(By.xpath(String.format(deleteProductButton, productName)));
         actions.moveToElement(DriverFactory.getInstance().findElement(By.xpath(String.format(deleteProductButton, productName))))
-                .click().build().perform();
+                .click().perform();
     }
 }

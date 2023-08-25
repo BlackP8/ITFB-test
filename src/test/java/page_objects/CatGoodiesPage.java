@@ -1,17 +1,30 @@
 package page_objects;
 
-import base.BasePage;
+import library.base.BasePage;
+import library.driver.DriverFactory;
 import org.openqa.selenium.By;
-import utils.WaitUtil;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import library.utils.WaitUtil;
+
+import java.time.Duration;
+import java.util.ArrayList;
+
+/**
+ * @author - Pavel Romanov
+ */
 
 public class CatGoodiesPage extends BasePage {
-    private final String productPath = "(//*[@data-autotest-id='product-snippet'])[%s]";
+    private static final Actions actions = new Actions(DriverFactory.getInstance());
+    private final By productPath = By.cssSelector("*[data-autotest-id='product-snippet']");
 
     public CatGoodiesPage() {
         super(By.xpath("//h1[contains(text(),'Лакомства для кошек')]"));
     }
 
     public void chooseProduct(String productNumber) {
-        WaitUtil.setPresenceWait(By.xpath(String.format(productPath, productNumber))).click();
+        WaitUtil.setVisibilityWait(productPath);
+        ArrayList<WebElement> products = (ArrayList<WebElement>) DriverFactory.getInstance().findElements(productPath);
+        actions.pause(Duration.ofSeconds(3)).click(products.get(Integer.parseInt(productNumber))).perform();
     }
 }

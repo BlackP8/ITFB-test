@@ -1,25 +1,30 @@
-package utils;
+package library.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
-
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @author - Pavel Romanov
+ */
+
 @Slf4j
 public class DataProviderUtil {
     private JSONObject jsonTestObject = null;
-    private static String testFile = "test_file";
-    private JSONArray jsonTestArray = null;
+    private static final String TEST_FILE_PARAM_NAME = "test_file";
 
+    /**
+     * Метод для импорта тестовых данных из JSON и создания DataProvider
+     * @param context
+     * @return Object[][]
+     */
     @DataProvider(name = "testData")
     public Object[][] getData(ITestContext context) {
-        jsonTestObject = ConfigUtil.setTestData(context.getCurrentXmlTest().getParameter(testFile));
+        jsonTestObject = ConfigUtil.setTestData(context.getCurrentXmlTest().getParameter(TEST_FILE_PARAM_NAME));
         Map<String, String> hashMap = new LinkedHashMap<>();
 
         if (jsonTestObject != null) {

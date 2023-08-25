@@ -1,9 +1,9 @@
 {
-  "minPrice": "50",
-  "maxPrice": "1000",
+  "minPrice": "650",
+  "maxPrice": "1500",
   "firstBrandName": "Whiskas",
-  "secondBrandName": "Мнямс",
+  "secondBrandName": "Titbit",
   "firstProductNumber": "0",
   "secondProductNumber": "1",
-  "expectedPriceSumLimit": "1000"
+  "expectedPriceSumLimit": "2000"
 }
